@@ -9,11 +9,11 @@ export const useVoluntariosStore = defineStore('voluntarios' , () => {
   const errorMessage = ref<string>('')
   const paginationData = ref<any>()
   const loading = ref<boolean>(false)
-  const size = ref<number>(10)
+  const size = ref<number>(6)
   const page = ref<number>(0)
   const actualPage = ref(page.value + 1) 
 
-    const getUsers = async (page = 0, size= 10): Promise<any> => {
+    const getUsers = async (page = 0, size= 6): Promise<any> => {
         loading.value = true
         errorMessage.value = ''
         
