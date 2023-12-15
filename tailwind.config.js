@@ -3,10 +3,14 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,vue}",
+    "./formkit.config.ts"
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    // eslint-disable-next-line no-undef
+    require('@tailwindcss/forms'),
+  ],
 }
 

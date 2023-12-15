@@ -21,20 +21,22 @@ import CardIndex from '@/components/Card-index.vue';
         </svg>
       </CardIndex>
     </RouterLink>
-    <CardIndex bgColor="hover:bg-green-500" text-color="text-green-500" title="Añadir Participantes"
-      border-color="border-green-500"
-      text="Aquí podrás añadir toda la información para crear un nuevo participante del PPAM" color="green-500">
-      <svg xmlns="http://www.w3.org/2000/svg"
-        class="h-16 w-16 mx-auto text-green-500 group-hover:text-white transition-colors" width="24" height="24"
-        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-        stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-        <path d="M16 19h6" />
-        <path d="M19 16v6" />
-        <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
-      </svg>
-    </CardIndex>
+    <RouterLink :to="{ name: 'add-voluntarios' }">
+      <CardIndex bgColor="hover:bg-green-500" text-color="text-green-500" title="Añadir Participantes"
+        border-color="border-green-500"
+        text="Aquí podrás añadir toda la información para crear un nuevo participante del PPAM" color="green-500">
+        <svg xmlns="http://www.w3.org/2000/svg"
+          class="h-16 w-16 mx-auto text-green-500 group-hover:text-white transition-colors" width="24" height="24"
+          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+          <path d="M16 19h6" />
+          <path d="M19 16v6" />
+          <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+        </svg>
+      </CardIndex>
+    </RouterLink>
     <CardIndex bgColor="hover:bg-fuchsia-500" text-color="text-fuchsia-500" title="Crear programa"
       border-color="border-fuchsia-500" text="Aquí crearás y organizarás el programa del PPAM">
       <svg xmlns="http://www.w3.org/2000/svg"

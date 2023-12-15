@@ -6,6 +6,7 @@ import { storeToRefs } from 'pinia';
 import TableVoluntarios from '@/components/Table-voluntarios.vue'
 import TableVoluntariosLoading from '@/components/loading-table.vue'
 import PaginationTable from '@/components/Pagination-table.vue'
+import BackButton from '../components/BackButton.vue'
 
 const router = useRouter()
 const voluntariosStore = useVoluntariosStore()
@@ -31,10 +32,7 @@ const handleSubmit = async () => {
 </script>
 <template>
     <main class="max-w-6xl mx-auto my-10">
-        <button class="bg-cyan-500 px-4 py-2 rounded-xl text-white hover:bg-cyan-600 transition-colors"
-            @click="router.back()">
-            Volver
-        </button>
+        <BackButton />
         <form class="mt-5 flex gap-3" @submit.prevent="handleSubmit">
             <input v-model="name" class="border-2 p-2 rounded-xl" type="text" placeholder="Ej: Daniel, Ondo, Nguema...">
             <button class="bg-cyan-500 px-4 py-2 rounded-xl text-white hover:bg-cyan-600 transition-colors">Buscar</button>

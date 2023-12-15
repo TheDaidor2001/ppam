@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/voluntarios',
       name: 'voluntarios',
       component: () => import('../views/VoluntariosView.vue')
+    },
+    {
+      path: '/add-voluntarios',
+      name: 'add-voluntarios',
+      component: () => import('../views/AddVoluntariosView.vue')
     }
   ]
 })
