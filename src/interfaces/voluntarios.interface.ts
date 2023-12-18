@@ -15,10 +15,37 @@ export interface Voluntarios {
 }
 
 export interface Voluntario {
-    _id:            string;
+    _id?:            string;
     nombre:         string;
-    contacto:       number;
-    disponibilidad: string[];
+    contacto:       string | undefined ;
+    disponibilidad: DisponibilityDays[] | null;
     congregacion:   string;
-    observasiones:  string;
+    observaciones:  string;
+}
+
+export interface DisponibilityDays {
+    martesT1: string,
+    martesT2: string,
+    martesT3: string,
+    martesT4: string,
+    miercolesT1: string,
+    miercolesT2: string,
+    miercolesT3: string,
+    miercolesT4: string,
+    juevesT1: string,
+    juevesT2: string,
+    juevesT3: string,
+    juevesT4: string,
+    viernesT1: string,
+    viernesT2: string,
+    viernesT3: string,
+    viernesT4: string,
+    sabadoT1: string,
+    sabadoT2: string,
+    sabadoT3: string,
+    sabadoT4: string,
+    domingoT1: string,
+    domingoT2: string,
+    domingoT3: string,
+    domingoT4: string,
 }

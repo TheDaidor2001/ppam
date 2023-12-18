@@ -3,12 +3,17 @@ import http from '@/plugins/http';
 
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
+import { useToast } from "vue-toastification";
 
 export const useVoluntariosStore = defineStore('voluntarios' , () => {
+  const toast = useToast();
+
+
   const users = ref<Voluntario[]>([])
   const errorMessage = ref<string>('')
   const paginationData = ref<any>()
   const loading = ref<boolean>(false)
+  const loadingDelete = ref<boolean>(false)
   const size = ref<number>(6)
   const page = ref<number>(0)
   const actualPage = ref(page.value + 1) 
@@ -26,6 +31,36 @@ export const useVoluntariosStore = defineStore('voluntarios' , () => {
        }finally {
         loading.value = false
        }
+    }
+
+    const postUsers = async (user: Voluntario): Promise<any> => {
+      loading.value = true
+      errorMessage.value = ''
+      try {
+        const {data} = await http.post('post', user)
+        console.log(data);
+        
+      } catch (error) {
+        errorMessage.value = 'Error en la Base de datos, por favor recarga la página web'
+        console.log(error);
+        
+      }finally {
+        loading.value = false
+      }
+    }
+
+    const deleteUser = async (id:string |undefined): Promise<any>  => {
+      loadingDelete.value = true
+      try {
+        const newData = users.value.filter(user => user._id !== id)
+        await http.delete(`delete/${id}`)
+        users.value = newData;
+        toast.success('Voluntario eliminado')
+      } catch (error) {
+        toast.error('Error al eliminar el voluntario, inténtelo más tarde')
+      } finally {
+        loadingDelete.value = false
+      }
     }
 
     const setPage = (pageRecibed: number): void => {
@@ -67,6 +102,7 @@ export const useVoluntariosStore = defineStore('voluntarios' , () => {
     actualPage,
     paginationData,
     errormessage: errorMessage,
+    loadingDelete,
 
     //getters
 
@@ -74,6 +110,8 @@ export const useVoluntariosStore = defineStore('voluntarios' , () => {
     //actions
     getUsers,
     setPage,
-    getUserByName
+    getUserByName,
+    postUsers,
+    deleteUser
   };
 });

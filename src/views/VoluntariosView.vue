@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
 import { onMounted, ref } from 'vue'
 import { useVoluntariosStore } from '../stores/voluntarios';
 import { storeToRefs } from 'pinia';
 import TableVoluntarios from '@/components/Table-voluntarios.vue'
 import TableVoluntariosLoading from '@/components/loading-table.vue'
-import PaginationTable from '@/components/Pagination-table.vue'
+
 import BackButton from '../components/BackButton.vue'
 
-const router = useRouter()
 const voluntariosStore = useVoluntariosStore()
 const { getUsers, getUserByName } = voluntariosStore
 const { users, loading } = storeToRefs(voluntariosStore)
@@ -40,8 +38,6 @@ const handleSubmit = async () => {
 
         <TableVoluntariosLoading v-if="loading" />
         <TableVoluntarios v-else :voluntarios="users" />
-        <PaginationTable />
-
     </main>
 </template>
 

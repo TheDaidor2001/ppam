@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
+import { useToast } from "vue-toastification";
+import { useVoluntariosStore } from '../stores/voluntarios';
 import BackButton from '../components/BackButton.vue'
-// import { Voluntario } from '../interfaces/voluntarios.interface';
+import type { Voluntario } from '../interfaces/voluntarios.interface';
+import { useRouter } from 'vue-router';
+
 
 const voluntario = reactive({
     nombre: '',
@@ -11,8 +15,28 @@ const voluntario = reactive({
     observaciones: '',
 })
 
-const submitHandler = (data: any): any => {
+const voluntariosStore = useVoluntariosStore()
+const { postUsers } = voluntariosStore
+const toast = useToast();
+const router = useRouter()
+
+const submitHandler = async (data: Voluntario): Promise<any> => {
     console.log(data);
+
+    try {
+        await postUsers(data)
+        toast.success('Usuario creado con éxito')
+        router.push({ name: 'home' })
+        Object.assign(voluntario, {
+            nombre: '',
+            contacto: '',
+            congregacion: '',
+            disponibilidad: [],
+            observaciones: '',
+        })
+    } catch (error) {
+        toast.error('Error al guardar el usuario, inténtalo más tarde')
+    }
 }
 
 </script>
@@ -20,15 +44,15 @@ const submitHandler = (data: any): any => {
 <template>
     <main class="max-w-6xl mx-auto my-10 px-10 lg:px-0">
         <BackButton />
-        <section class="grid mt-10 items-center">
+        <section class="grid mt-10 items-center ">
             <FormKit type="form" submit-label="Añadir voluntario" @submit="submitHandler" :incomplete-message="false">
                 <FormKit type="text" label="Nombre Completo" name="nombre"
                     :validation-messages="{ required: 'El nombre es obligatorio' }" validation="required"
                     v-model="voluntario.nombre" />
-                <FormKit type="text" label="Contacto" name="contacto"
-                    :validation-messages="{ required: 'El contacto es obligatorio' }" validation="required"
-                    v-model="voluntario.contacto" />
-                <FormKit type="select" label="Añade la congregación" name="congregación" validation="required"
+                <FormKit type="tel" label="Contacto" name="contacto" placeholder="xxx-xxx-xxx" :validation-messages="{
+                    required: 'El contacto es obligatorio'
+                }" validation="required" v-model.number="voluntario.contacto" />
+                <FormKit type="select" label="Añade la congregación" name="congregacion" validation="required"
                     :validation-messages="{ required: 'La congregación es obligatoria' }" :options="[
                         '--Selecciona una congregación',
                         'Timbabé',
@@ -76,7 +100,7 @@ const submitHandler = (data: any): any => {
                     :help="`${voluntario.observaciones ? voluntario.observaciones.length : 0} / 120`"
                     validation="length:0,120" :validation-messages="{
                         length: 'La observación no puede ser de más de 120 carácteres'
-                    }" v-model="voluntario.observaciones" />
+                    }" v-model="voluntario.observaciones" name="observaciones" />
             </FormKit>
         </section>
     </main>
