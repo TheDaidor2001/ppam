@@ -49,19 +49,21 @@ export const useVoluntariosStore = defineStore('voluntarios' , () => {
       }
     }
 
-    const deleteUser = async (id:string |undefined): Promise<any>  => {
-      loadingDelete.value = true
-      try {
-        const newData = users.value.filter(user => user._id !== id)
-        await http.delete(`delete/${id}`)
-        users.value = newData;
-        toast.success('Voluntario eliminado')
-      } catch (error) {
-        toast.error('Error al eliminar el voluntario, inténtelo más tarde')
-      } finally {
-        loadingDelete.value = false
-      }
+    const deleteUser = async (id:string | undefined): Promise<any>  => {
+    
+        loadingDelete.value = true
+        try {
+          const newData = users.value.filter(user => user._id !== id)
+          await http.delete(`delete/${id}`)
+          users.value = newData;
+          toast.success('Voluntario eliminado')
+        } catch (error) {
+          toast.error('Error al eliminar el voluntario, inténtelo más tarde')
+        } finally {
+          loadingDelete.value = false
+        }
     }
+    
 
     const setPage = (pageRecibed: number): void => {
       page.value = pageRecibed

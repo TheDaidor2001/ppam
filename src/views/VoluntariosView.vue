@@ -9,10 +9,11 @@ import BackButton from '../components/BackButton.vue'
 
 const voluntariosStore = useVoluntariosStore()
 const { getUsers, getUserByName } = voluntariosStore
-const { users, loading } = storeToRefs(voluntariosStore)
+const { users, loading, page } = storeToRefs(voluntariosStore)
 
 onMounted(() => {
     getUsers()
+    page.value = 0
 
 })
 
