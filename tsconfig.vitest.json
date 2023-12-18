@@ -9,7 +9,4 @@
       "jsdom"
     ]
   },
-  "include": [
-    "formkit.config.ts"
-  ]
 }
