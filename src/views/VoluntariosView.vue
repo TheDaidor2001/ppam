@@ -32,7 +32,7 @@ const handleSubmit = async () => {
 <template>
     <main class="max-w-6xl mx-auto my-10">
         <BackButton />
-        <form class="mt-5 flex gap-3" @submit.prevent="handleSubmit">
+        <form class="mt-5 flex gap-3 justify-end" @submit.prevent="handleSubmit">
             <input v-model="name" class="border-2 p-2 rounded-xl" type="text" placeholder="Ej: Daniel, Ondo, Nguema...">
             <button class="bg-cyan-500 px-4 py-2 rounded-xl text-white hover:bg-cyan-600 transition-colors">Buscar</button>
         </form>
