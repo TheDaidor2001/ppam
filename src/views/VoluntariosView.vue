@@ -4,12 +4,14 @@ import { useVoluntariosStore } from '../stores/voluntarios';
 import { storeToRefs } from 'pinia';
 import TableVoluntarios from '@/components/Table-voluntarios.vue'
 import TableVoluntariosLoading from '@/components/loading-table.vue'
+import { useToast } from 'vue-toastification';
 
 import BackButton from '../components/BackButton.vue'
 
 const voluntariosStore = useVoluntariosStore()
 const { getUsers, getUserByName } = voluntariosStore
 const { users, loading, page } = storeToRefs(voluntariosStore)
+const toast = useToast()
 
 onMounted(() => {
     getUsers()
@@ -22,7 +24,8 @@ const name = ref<string>('')
 const handleSubmit = async () => {
     if (name.value === "") {
         //TODO poner alerta de vue
-        alert('No se puede buscar un nombre vacio')
+        toast.error('El campo no puede estar vacio')
+        return
     }
     await getUserByName(name.value)
 

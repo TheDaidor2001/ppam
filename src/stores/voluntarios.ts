@@ -77,6 +77,7 @@ export const useVoluntariosStore = defineStore('voluntarios' , () => {
 
         if(data.docs.length === 0){
           errorMessage.value = 'No se han econtrado voluntarios'
+          return
         }
         users.value = data.docs;
       } catch (error) {

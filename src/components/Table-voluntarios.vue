@@ -9,11 +9,10 @@ interface Props {
     voluntarios: Voluntario[]
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const voluntariosStore = useVoluntariosStore()
-const { deleteUser } = voluntariosStore
-const { errormessage, loadingDelete } = storeToRefs(voluntariosStore)
+const { errormessage } = storeToRefs(voluntariosStore)
 
 
 </script>
